@@ -54,7 +54,7 @@ export default function Home({ onStart }: { onStart: (s: DateSession) => void })
       <p className="text-sm text-gray-600 mb-4">Simulated messages for awkward situations. Don’t use for real emergencies.</p>
 
       <label className="block text-sm font-medium">How long into the date? (minutes)</label>
-      <input type="number" value={timeInDate} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTimeInDate(Number(e.target.value))} className="w-full p-2 my-2 border rounded" min={0} />
+      <input type="number" value={timeInDate} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTimeInDate(Math.max(0, Math.min(300, Number(e.target.value))))} className="w-full p-2 my-2 border rounded" min={0} />
       <p className="text-xs text-gray-500">Suggested delay: {suggestDelay()} min</p>
 
       <label className="block text-sm font-medium">Scenario</label>
@@ -68,7 +68,7 @@ export default function Home({ onStart }: { onStart: (s: DateSession) => void })
       </select>
 
       <label className="block text-sm font-medium">Sender name</label>
-      <input value={senderName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSenderName(e.target.value)} className="w-full p-2 my-2 border rounded" />
+      <input value={senderName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSenderName(e.target.value.replace(/[^a-zA-Z0-9\s]/g, '').slice(0,20).trim())} className="w-full p-2 my-2 border rounded" />
 
       <label className="block text-sm font-medium">Plausibility</label>
       <div className="flex gap-2 my-2">
@@ -96,7 +96,7 @@ export default function Home({ onStart }: { onStart: (s: DateSession) => void })
       {deliveryMode === 'scheduled' && (
         <div>
           <label className="block text-sm">Delay (minutes)</label>
-          <input type="number" value={delay} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDelay(Number(e.target.value))} className="w-full p-2 my-2 border rounded" min={1} />
+          <input type="number" value={delay} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDelay(Math.max(1, Math.min(120, Number(e.target.value))))} className="w-full p-2 my-2 border rounded" min={1} />
         </div>
       )}
 
