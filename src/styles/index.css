@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* simple large panic button */
+.panic-btn {
+  @apply bg-red-600 text-white font-bold rounded-full shadow-lg;
+}
+
+.sender-bubble {
+  @apply bg-white rounded-xl shadow p-4;
+}
