@@ -76,9 +76,11 @@ export default function App() {
         {screen === 'session' && session && <Session session={session} onPanic={handlePanic} onCancel={handleCancelSession} />}
         {screen === 'message' && lastMessage && <MessageReceived msg={lastMessage} onDone={handleDoneViewing} />}
       </div>
-      {/* Hamburger menu for mobile */}
-      <button onClick={() => setMenuOpen(!menuOpen)} className="fixed top-4 left-4 p-2 bg-white rounded shadow md:hidden z-20">☰</button>
-      {menuOpen && (
+      {/* Hamburger menu for mobile - hidden on home screen */}
+      {screen !== 'home' && (
+        <button onClick={() => setMenuOpen(!menuOpen)} className="fixed top-4 left-4 p-2 bg-white rounded shadow md:hidden z-20">☰</button>
+      )}
+      {menuOpen && screen !== 'home' && (
         <div className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-30" onClick={() => setMenuOpen(false)}>
           <div className="absolute top-0 left-0 bottom-0 w-64 bg-white p-4 shadow-lg" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => { setScreen('home'); setMenuOpen(false) }} className="block w-full p-2 mb-2 text-left hover:bg-gray-100">🏠 Home</button>
@@ -86,11 +88,13 @@ export default function App() {
           </div>
         </div>
       )}
-      {/* Desktop Navigation */}
-      <div className="fixed top-4 left-4 flex gap-2 hidden md:flex">
-        <button onClick={() => setScreen('home')} className="p-2 bg-white rounded shadow">Home</button>
-        <button onClick={() => setScreen('history')} className="p-2 bg-white rounded shadow">History</button>
-      </div>
+      {/* Desktop Navigation - hidden on home screen */}
+      {screen !== 'home' && (
+        <div className="fixed top-4 left-4 flex gap-2 hidden md:flex">
+          <button onClick={() => setScreen('home')} className="p-2 bg-white rounded shadow">Home</button>
+          <button onClick={() => setScreen('history')} className="p-2 bg-white rounded shadow">History</button>
+        </div>
+      )}
       {screen === 'history' && <div className="fixed inset-0 bg-black bg-opacity-30 p-4 z-10">
         <div className="max-w-md mx-auto bg-white rounded p-4 mt-8">
           <div className="flex justify-between items-center mb-2">
