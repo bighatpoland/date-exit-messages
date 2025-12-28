@@ -3,6 +3,7 @@ import Home from './components/Home'
 import Session from './components/Session'
 import MessageReceived from './components/MessageReceived'
 import History from './components/History'
+import Landing from './components/Landing'
 import { DateSession, GeneratedMessage } from './types'
 
 function loadHistory(): GeneratedMessage[] {
@@ -21,7 +22,7 @@ function saveHistory(h: GeneratedMessage[]) {
 
 export default function App() {
   // Updated navigation: side menu for mobile, top buttons for desktop
-  const [screen, setScreen] = useState<'home'|'session'|'message'|'history'>('home')
+  const [screen, setScreen] = useState<'landing'|'home'|'session'|'message'|'history'>('landing')
   const [session, setSession] = useState<DateSession | null>(null)
   const [lastMessage, setLastMessage] = useState<GeneratedMessage | null>(null)
   const [history, setHistory] = useState<GeneratedMessage[]>(() => loadHistory())
@@ -63,14 +64,14 @@ export default function App() {
     try { localStorage.removeItem('activeSession') } catch (e) {}
   }
 
-  function handleDoneViewing() {
-    setLastMessage(null)
+  function handleLandingComplete() {
     setScreen('home')
   }
 
   return (
     <div className="min-h-screen flex flex-col">
       <div className="flex-1 flex flex-col items-center">
+        {screen === 'landing' && <Landing onComplete={handleLandingComplete} />}
         {screen === 'home' && <Home onStart={startSession} />}
         {screen === 'session' && session && <Session session={session} onPanic={handlePanic} onCancel={handleCancelSession} />}
         {screen === 'message' && lastMessage && <MessageReceived msg={lastMessage} onDone={handleDoneViewing} />}
