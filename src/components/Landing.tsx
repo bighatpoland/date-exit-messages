@@ -27,12 +27,16 @@ export default function Landing({ onComplete }: { onComplete: () => void }) {
       })
     }, 100)
 
+    // Transition after 3 seconds instead of waiting for full progress
+    const transitionTimeout = setTimeout(onComplete, 3000)
+
     const messageInterval = setInterval(() => {
       setMessageIndex(prev => (prev + 1) % loadingMessages.length)
     }, 800) // Change message every 800ms
 
     return () => {
       clearInterval(interval)
+      clearTimeout(transitionTimeout)
       clearInterval(messageInterval)
     }
   }, [onComplete])
