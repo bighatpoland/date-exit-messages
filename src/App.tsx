@@ -20,11 +20,12 @@ function saveHistory(h: GeneratedMessage[]) {
 }
 
 export default function App() {
-  // Updated navigation: bottom tabs for mobile, top buttons for desktop
+  // Updated navigation: side menu for mobile, top buttons for desktop
   const [screen, setScreen] = useState<'home'|'session'|'message'|'history'>('home')
   const [session, setSession] = useState<DateSession | null>(null)
   const [lastMessage, setLastMessage] = useState<GeneratedMessage | null>(null)
   const [history, setHistory] = useState<GeneratedMessage[]>(() => loadHistory())
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     // restore last session if any
@@ -69,22 +70,21 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="flex-1 flex flex-col items-center pb-16 md:pb-0">
+      <div className="flex-1 flex flex-col items-center">
         {screen === 'home' && <Home onStart={startSession} />}
         {screen === 'session' && session && <Session session={session} onPanic={handlePanic} onCancel={handleCancelSession} />}
         {screen === 'message' && lastMessage && <MessageReceived msg={lastMessage} onDone={handleDoneViewing} />}
       </div>
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center py-2 px-4 md:hidden">
-        <button onClick={() => setScreen('home')} className={`flex flex-col items-center p-2 rounded ${screen === 'home' ? 'text-blue-500' : 'text-gray-500'}`}>
-          <span className="text-lg">🏠</span>
-          <span className="text-xs">Home</span>
-        </button>
-        <button onClick={() => setScreen('history')} className={`flex flex-col items-center p-2 rounded ${screen === 'history' ? 'text-blue-500' : 'text-gray-500'}`}>
-          <span className="text-lg">📜</span>
-          <span className="text-xs">History</span>
-        </button>
-      </div>
+      {/* Hamburger menu for mobile */}
+      <button onClick={() => setMenuOpen(!menuOpen)} className="fixed top-4 left-4 p-2 bg-white rounded shadow md:hidden z-20">☰</button>
+      {menuOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-30" onClick={() => setMenuOpen(false)}>
+          <div className="absolute top-0 left-0 bottom-0 w-64 bg-white p-4 shadow-lg" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => { setScreen('home'); setMenuOpen(false) }} className="block w-full p-2 mb-2 text-left hover:bg-gray-100">🏠 Home</button>
+            <button onClick={() => { setScreen('history'); setMenuOpen(false) }} className="block w-full p-2 text-left hover:bg-gray-100">📜 History</button>
+          </div>
+        </div>
+      )}
       {/* Desktop Navigation */}
       <div className="fixed top-4 left-4 flex gap-2 hidden md:flex">
         <button onClick={() => setScreen('home')} className="p-2 bg-white rounded shadow">Home</button>
