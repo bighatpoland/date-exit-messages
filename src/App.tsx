@@ -67,15 +67,29 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center">
-      {screen === 'home' && <Home onStart={startSession} />}
-      {screen === 'session' && session && <Session session={session} onPanic={handlePanic} onCancel={handleCancelSession} />}
-      {screen === 'message' && lastMessage && <MessageReceived msg={lastMessage} onDone={handleDoneViewing} />}
-      <div className="fixed bottom-4 left-4 right-4 flex justify-between max-w-md mx-auto">
+    <div className="min-h-screen flex flex-col">
+      <div className="flex-1 flex flex-col items-center pb-16 md:pb-0">
+        {screen === 'home' && <Home onStart={startSession} />}
+        {screen === 'session' && session && <Session session={session} onPanic={handlePanic} onCancel={handleCancelSession} />}
+        {screen === 'message' && lastMessage && <MessageReceived msg={lastMessage} onDone={handleDoneViewing} />}
+      </div>
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center py-2 px-4 md:hidden">
+        <button onClick={() => setScreen('home')} className={`flex flex-col items-center p-2 rounded ${screen === 'home' ? 'text-blue-500' : 'text-gray-500'}`}>
+          <span className="text-lg">🏠</span>
+          <span className="text-xs">Home</span>
+        </button>
+        <button onClick={() => setScreen('history')} className={`flex flex-col items-center p-2 rounded ${screen === 'history' ? 'text-blue-500' : 'text-gray-500'}`}>
+          <span className="text-lg">📜</span>
+          <span className="text-xs">History</span>
+        </button>
+      </div>
+      {/* Desktop Navigation */}
+      <div className="fixed top-4 left-4 flex gap-2 hidden md:flex">
         <button onClick={() => setScreen('home')} className="p-2 bg-white rounded shadow">Home</button>
         <button onClick={() => setScreen('history')} className="p-2 bg-white rounded shadow">History</button>
       </div>
-      {screen === 'history' && <div className="fixed inset-0 bg-black bg-opacity-30 p-4">
+      {screen === 'history' && <div className="fixed inset-0 bg-black bg-opacity-30 p-4 z-10">
         <div className="max-w-md mx-auto bg-white rounded p-4 mt-8">
           <div className="flex justify-between items-center mb-2">
             <h3 className="font-bold">History</h3>

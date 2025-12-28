@@ -33,5 +33,10 @@ export type Template = {
     medium: string[]
     nuclear: string[]
   }
+  postEscapeScriptsBySeverity: {
+    mild: string[]
+    medium: string[]
+    nuclear: string[]
+  }
 }
 

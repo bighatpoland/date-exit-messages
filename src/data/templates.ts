@@ -21,6 +21,20 @@ const templates: Template[] = [
         "{NAME}: I can't drive, Max collapsed and isn't breathing. Need you now.",
       ],
     },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Sorry about cutting the date short, my dog was sick but he's okay now.",
+        "Had a little emergency with my pet, but everything's fine. Let's reschedule?",
+      ],
+      medium: [
+        "My dog needed urgent attention, but he's stable now. Apologies for leaving abruptly.",
+        "Vet visit was necessary, but my pup is doing better. Sorry for the interruption.",
+      ],
+      nuclear: [
+        "Emergency with my dog, had to rush to the vet. He's recovering now.",
+        "Critical situation with my pet, but he's in good hands. Let's talk later.",
+      ],
+    },
   },
   {
     id: 'roommate-locked-out',
@@ -38,6 +52,20 @@ const templates: Template[] = [
       nuclear: [
         "{NAME}: I left my kid inside and locked myself out — urgent! Need help.",
         "{NAME}: There's a leak/poisoning concern — home urgently, please.",
+      ],
+    },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Sorry, got locked out of my place. Got back in safely.",
+        "Minor issue with keys, but all sorted now. Apologies.",
+      ],
+      medium: [
+        "Locked out and needed help getting in. Everything's fine now.",
+        "Had to deal with being stuck outside, but I'm home. Sorry for leaving.",
+      ],
+      nuclear: [
+        "Serious situation with being locked out, but resolved. Let's catch up soon.",
+        "Emergency at home, but it's under control now. Apologies for the abrupt exit.",
       ],
     },
   },
@@ -59,6 +87,20 @@ const templates: Template[] = [
         "{NAME}: {DETAIL} — we need to evacuate, please come asap.",
       ],
     },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Sorry, had a small plumbing issue at home. Fixed now.",
+        "Leak in the kitchen, but it's sorted. Apologies for leaving early.",
+      ],
+      medium: [
+        "Major water issue, but the plumber handled it. Sorry for the interruption.",
+        "Burst pipe, but everything's under control now. Let's reschedule.",
+      ],
+      nuclear: [
+        "Flooding emergency at home, but it's contained. Apologies.",
+        "Had to evacuate due to leak, but back safe. Sorry about that.",
+      ],
+    },
   },
   {
     id: 'work-call',
@@ -76,6 +118,20 @@ const templates: Template[] = [
       nuclear: [
         "{NAME}: Major outage — everyone's being pulled in. Can't stay out.",
         "{NAME}: This is urgent: legal/reputation issue, get here now.",
+      ],
+    },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Work called with a small issue, but it's resolved. Sorry.",
+        "Had to take a quick work call, back now. Apologies.",
+      ],
+      medium: [
+        "Client emergency at work, but handled it. Sorry for stepping out.",
+        "Urgent work matter, but everything's okay now. Let's continue.",
+      ],
+      nuclear: [
+        "Major work crisis, but it's under control. Apologies for leaving.",
+        "Had to deal with a serious work issue, but back safe. Sorry.",
       ],
     },
   },
@@ -97,6 +153,20 @@ const templates: Template[] = [
         "{NAME}: They're asking us to come immediately, please leave now.",
       ],
     },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Family member not feeling well, but they're okay now. Sorry.",
+        "Had to check on a relative, but everything's fine. Apologies.",
+      ],
+      medium: [
+        "Family emergency, but they're stable. Sorry for leaving abruptly.",
+        "Had to go to the hospital with family, but back now. Let's talk.",
+      ],
+      nuclear: [
+        "Critical family illness, but they're recovering. Apologies.",
+        "Serious situation with family, but under control. Sorry about that.",
+      ],
+    },
   },
   {
     id: 'car-breakdown',
@@ -114,6 +184,20 @@ const templates: Template[] = [
       nuclear: [
         "{NAME}: Breakdown in bad area — need you to come pick me up now.",
         "{NAME}: Accident involved, calling for assistance. Sorry, must go.",
+      ],
+    },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Car trouble, but it's fixed now. Sorry for the delay.",
+        "Had a flat tire or something, but sorted. Apologies.",
+      ],
+      medium: [
+        "Car broke down, but towed safely. Sorry for leaving.",
+        "Vehicle issue, but I'm home now. Let's reschedule.",
+      ],
+      nuclear: [
+        "Major car breakdown, but safe. Apologies for the emergency.",
+        "Accident with the car, but no injuries. Sorry about that.",
       ],
     },
   },
@@ -135,6 +219,20 @@ const templates: Template[] = [
         "{NAME}: Serious allergic reaction — need to get to A&E now.",
       ],
     },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Childcare issue, but the kid is fine. Sorry.",
+        "Had to handle something with the babysitter, all good now.",
+      ],
+      medium: [
+        "Child had a fever, but better now. Apologies for leaving.",
+        "Kid needed attention, but stable. Let's talk later.",
+      ],
+      nuclear: [
+        "Serious issue with my child, but they're okay. Sorry.",
+        "Hospital visit for the kid, but recovering. Apologies.",
+      ],
+    },
   },
   {
     id: 'neighbor-fire',
@@ -152,6 +250,20 @@ const templates: Template[] = [
       nuclear: [
         "{NAME}: Fire in the building — emergency services called. Must go.",
         "{NAME}: Evacuating now, can't stay. I'm safe but leaving.",
+      ],
+    },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "False alarm with smoke, but all clear. Sorry.",
+        "Fire alarm, but nothing serious. Apologies.",
+      ],
+      medium: [
+        "Smoke in the building, but evacuated safely. Sorry.",
+        "Had to evacuate due to smoke, but fine now. Let's reschedule.",
+      ],
+      nuclear: [
+        "Fire emergency, but contained. Apologies for leaving.",
+        "Building fire, but everyone safe. Sorry about that.",
       ],
     },
   },
@@ -173,6 +285,20 @@ const templates: Template[] = [
         "{NAME}: Critical issue, call when you can. I'm heading to the vet.",
       ],
     },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Pet sitter issue, but pet is fine. Sorry.",
+        "Had to adjust pet care, all good now. Apologies.",
+      ],
+      medium: [
+        "Pet unwell, but vet visit done. Sorry for leaving.",
+        "Had to take pet to vet, but okay now. Let's talk.",
+      ],
+      nuclear: [
+        "Pet emergency, but recovering. Apologies.",
+        "Critical pet issue, but under control. Sorry.",
+      ],
+    },
   },
   {
     id: 'delivery-accident',
@@ -190,6 +316,20 @@ const templates: Template[] = [
       nuclear: [
         "{NAME}: Car crash with injuries — must go to help.",
         "{NAME}: Major incident at delivery, can't stay.",
+      ],
+    },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Delivery delay, but sorted. Sorry.",
+        "Package issue, all resolved now. Apologies.",
+      ],
+      medium: [
+        "Minor accident with delivery, but handled. Sorry.",
+        "Had to deal with delivery collision, fine now. Let's reschedule.",
+      ],
+      nuclear: [
+        "Major delivery accident, but safe. Apologies.",
+        "Involved in crash, but no serious injuries. Sorry.",
       ],
     },
   },
@@ -211,6 +351,20 @@ const templates: Template[] = [
         "{NAME}: Hospital asked me to come in urgently; can't stay.",
       ],
     },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Medical check-up, all fine. Sorry for leaving early.",
+        "Had a doctor's appointment, but good news. Apologies.",
+      ],
+      medium: [
+        "Urgent medical follow-up, but okay now. Sorry.",
+        "Had to see the doctor, but stable. Let's talk.",
+      ],
+      nuclear: [
+        "Emergency medical treatment, but recovering. Apologies.",
+        "Hospital visit, but under control. Sorry.",
+      ],
+    },
   },
   {
     id: 'safety-concern',
@@ -228,6 +382,20 @@ const templates: Template[] = [
       nuclear: [
         "{NAME}: Confrontation happening, I need to leave and call for help.",
         "{NAME}: Unsafe situation — leaving immediately.",
+      ],
+    },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Felt unsafe, but all good now. Sorry.",
+        "Had a safety concern, but resolved. Apologies.",
+      ],
+      medium: [
+        "Suspicious activity, but safe now. Sorry for leaving.",
+        "Had to move for safety, fine now. Let's reschedule.",
+      ],
+      nuclear: [
+        "Unsafe situation, but called help. Apologies.",
+        "Confrontation, but de-escalated. Sorry.",
       ],
     },
   },
@@ -249,6 +417,20 @@ const templates: Template[] = [
         "{NAME}: Building emergency, leaving immediately.",
       ],
     },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Apartment maintenance, fixed now. Sorry.",
+        "Small home issue, all sorted. Apologies.",
+      ],
+      medium: [
+        "Home emergency, but resolved. Sorry for leaving.",
+        "Had to handle apartment problem, fine now. Let's talk.",
+      ],
+      nuclear: [
+        "Building hazard, but safe now. Apologies.",
+        "Evacuation due to leak, but back. Sorry.",
+      ],
+    },
   },
   {
     id: 'family-trust',
@@ -268,6 +450,20 @@ const templates: Template[] = [
         "{NAME}: Hospital called — need to be there right away.",
       ],
     },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Family matter, all good. Sorry.",
+        "Had to handle family stuff, fine now. Apologies.",
+      ],
+      medium: [
+        "Family help needed, but resolved. Sorry.",
+        "Had to assist family, back now. Let's talk.",
+      ],
+      nuclear: [
+        "Serious family issue, but okay. Apologies.",
+        "Family emergency, but under control. Sorry.",
+      ],
+    },
   },
   {
     id: 'plant-sitter',
@@ -285,6 +481,20 @@ const templates: Template[] = [
       nuclear: [
         "{NAME}: Plant emergency — pests or disease spreading.",
         "{NAME}: All plants dying, need immediate intervention.",
+      ],
+    },
+    postEscapeScriptsBySeverity: {
+      mild: [
+        "Plant sitter issue, plants fine. Sorry.",
+        "Had to water plants, all good. Apologies.",
+      ],
+      medium: [
+        "Plants wilting, but saved. Sorry.",
+        "Had to check on plants, okay now. Let's reschedule.",
+      ],
+      nuclear: [
+        "Plant disease, but treated. Apologies.",
+        "Plants dying, but intervened. Sorry.",
       ],
     },
   }
