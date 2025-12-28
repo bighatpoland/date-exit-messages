@@ -20,6 +20,7 @@ function saveHistory(h: GeneratedMessage[]) {
 }
 
 export default function App() {
+  // Updated navigation: bottom tabs for mobile, top buttons for desktop
   const [screen, setScreen] = useState<'home'|'session'|'message'|'history'>('home')
   const [session, setSession] = useState<DateSession | null>(null)
   const [lastMessage, setLastMessage] = useState<GeneratedMessage | null>(null)
