@@ -17,7 +17,7 @@ export default function Landing({ onComplete }: { onComplete: () => void }) {
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress(prev => {
-        const newProgress = prev + (100 / 30) // 3 seconds * 10 updates/sec = 30 steps
+        const newProgress = prev + (100 / 50) // 5 seconds * 10 updates/sec = 50 steps
         if (newProgress >= 100) {
           clearInterval(interval)
           setTimeout(onComplete, 500) // Small delay after 100%
@@ -29,7 +29,7 @@ export default function Landing({ onComplete }: { onComplete: () => void }) {
 
     const messageInterval = setInterval(() => {
       setMessageIndex(prev => (prev + 1) % loadingMessages.length)
-    }, 400) // Change message every 400ms
+    }, 800) // Change message every 800ms
 
     return () => {
       clearInterval(interval)
