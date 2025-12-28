@@ -4,11 +4,17 @@ A mobile-first web app to simulate incoming emergency messages, helping you poli
 
 [![CI](https://github.com/bighatpoland/date-exit-messages/actions/workflows/ci.yml/badge.svg)](https://github.com/bighatpoland/date-exit-messages/actions/workflows/ci.yml)
 
-## Description
+## Concept
 
-"Oh No, Emergency!" lets you create a "Date Session" with customizable scenarios (e.g., sick dog, plumber disaster). Trigger an instant "panic" message or schedule one with a countdown. Messages appear as realistic incoming texts with post-escape scripts for smooth exits.
+For: people on bad dates who need a socially acceptable escape without committing to full dishonesty themselves.
 
-**Important Disclaimer:** This app generates simulated messages only. It does not connect to real emergency services, contacts, or SMS. Use responsibly and never for actual emergencies.
+Core idea: The app sends alarming, semi-plausible emergency messages on demand or automatically, allowing the user to say: “Oh my God… I’m so sorry, I have to go.” The app becomes the villain. The user remains polite.
+
+How it works (absurdly simple): User sets a “date session”, chooses relationship (mom/dog/roommate/boss/plant sitter), severity level, taps PANIC, receives an incoming message that looks urgent and disruptive.
+
+Why this is absurd but needed: Everyone lies on bad dates. People hate being the bad person. This externalizes guilt into software. It’s a lie-as-a-service app — beautifully uncomfortable.
+
+Narrow target group: serial first-daters, conflict-avoidant people, people too polite to leave, people who rehearse exits in the bathroom.
 
 ## Features
 

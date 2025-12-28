@@ -30,7 +30,7 @@ export default function Session({ session, onPanic, onCancel }: { session: DateS
 
   function doPanic() {
     // build message
-    const body = pickRandomMessage(session.templateId, session.severity, session.senderName, session.relationLabel) || 'Please call me.'
+    const body = pickRandomMessage(session.templateId, session.severity, session.senderName, session.relationLabel, session.culture) || 'Please call me.'
     const msg: GeneratedMessage = {
       id: String(Date.now()),
       createdAt: Date.now(),

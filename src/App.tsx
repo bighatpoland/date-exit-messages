@@ -8,7 +8,10 @@ import { DateSession, GeneratedMessage } from './types'
 function loadHistory(): GeneratedMessage[] {
   try {
     const raw = localStorage.getItem('history')
-    return raw ? JSON.parse(raw) : []
+    if (!raw) return []
+    const parsed = JSON.parse(raw) as unknown
+    if (Array.isArray(parsed)) return parsed as GeneratedMessage[]
+    return []
   } catch (e) { return [] }
 }
 
@@ -46,7 +49,7 @@ export default function App() {
   function handlePanic(msg: GeneratedMessage) {
     setLastMessage(msg)
     setScreen('message')
-    setHistory(h => { const next = [msg, ...h]; return next })
+  setHistory((h: GeneratedMessage[]) => { const next = [msg, ...h]; return next })
     // clear session
     setSession(null)
     try { localStorage.removeItem('activeSession') } catch (e) {}

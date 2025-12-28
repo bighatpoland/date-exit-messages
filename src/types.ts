@@ -1,5 +1,6 @@
 export type Severity = 'mild' | 'medium' | 'nuclear'
 export type DeliveryMode = 'instant' | 'scheduled'
+export type Culture = 'neutral' | 'german' | 'mediterranean' | 'scandinavian'
 
 export type DateSession = {
   isActive: boolean
@@ -11,6 +12,7 @@ export type DateSession = {
   deliveryMode: DeliveryMode
   delayMinutes?: number
   scheduledAt?: number
+  culture: Culture
 }
 
 export type GeneratedMessage = {
@@ -32,3 +34,4 @@ export type Template = {
     nuclear: string[]
   }
 }
+

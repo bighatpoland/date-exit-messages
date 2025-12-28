@@ -3,10 +3,12 @@ import { GeneratedMessage } from '../types'
 import MessageCard from './MessageCard'
 
 const SCRIPTS = [
-  "I'm so sorry — something urgent came up. I need to go.",
-  "Can I get back to you later? Today got complicated.",
-  "I'd rather explain after I handle this.",
-  "I really need to step out — can we catch up another time?",
+  "I'm really sorry, today just collapsed on me.",
+  "I'd rather explain later, if that's okay.",
+  "Oh my God… I’m so sorry, I have to go.",
+  "Something urgent came up — can we catch up another time?",
+  "I need to step out immediately, but thank you for understanding.",
+  "This is unexpected — I'll make it up to you.",
 ]
 
 export default function MessageReceived({ msg, onDone }: { msg: GeneratedMessage, onDone: ()=>void }) {

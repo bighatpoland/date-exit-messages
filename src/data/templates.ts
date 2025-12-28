@@ -1,11 +1,12 @@
 import { Template } from '../types'
 
 // 15+ templates with placeholders {RELATION}, {NAME}, {DETAIL}
+// Updated sender options: mom, dog, roommate, boss, plant sitter, etc.
 const templates: Template[] = [
   {
     id: 'dog-sick',
     title: 'Dog sick',
-    senderOptions: ['Mom', 'Roommate', 'Sister', 'Friend'],
+    senderOptions: ['Mom', 'Roommate', 'Sister', 'Vet', 'Neighbor'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Hey, {RELATION}, Milo's thrown up a bit — can you come?",
@@ -24,7 +25,7 @@ const templates: Template[] = [
   {
     id: 'roommate-locked-out',
     title: 'Roommate locked out',
-    senderOptions: ['Roommate', 'Flatmate', 'Friend'],
+    senderOptions: ['Roommate', 'Flatmate', 'Friend', 'Neighbor'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Ugh I forgot my keys, can you pop home for 5?",
@@ -43,7 +44,7 @@ const templates: Template[] = [
   {
     id: 'plumber-disaster',
     title: 'Plumber disaster',
-    senderOptions: ['Landlord', 'Neighbor', 'Friend'],
+    senderOptions: ['Landlord', 'Neighbor', 'Friend', 'Concierge'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Plumber running late, water's dripping — can you hold off?",
@@ -62,7 +63,7 @@ const templates: Template[] = [
   {
     id: 'work-call',
     title: 'Urgent work call',
-    senderOptions: ['Boss', 'Manager', 'HR'],
+    senderOptions: ['Boss', 'Manager', 'HR', 'Colleague'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Quick call about today's meeting, can you call me back?",
@@ -81,7 +82,7 @@ const templates: Template[] = [
   {
     id: 'family-illness',
     title: 'Family illness',
-    senderOptions: ['Mom', 'Dad', 'Sister', 'Brother'],
+    senderOptions: ['Mom', 'Dad', 'Sister', 'Brother', 'Grandma'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Your aunt's feeling faint — can you come by later?",
@@ -100,7 +101,7 @@ const templates: Template[] = [
   {
     id: 'car-breakdown',
     title: 'Car breakdown',
-    senderOptions: ['Friend', 'Mechanic', 'Partner'],
+    senderOptions: ['Friend', 'Mechanic', 'Partner', 'Tow Service'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Car won't start, might be battery — I'll sort it.",
@@ -119,7 +120,7 @@ const templates: Template[] = [
   {
     id: 'childcare-emergency',
     title: 'Childcare emergency',
-    senderOptions: ['Babysitter', 'Partner', 'Friend'],
+    senderOptions: ['Babysitter', 'Partner', 'Friend', 'School'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Babysitter's schedule changed — need a hand soon.",
@@ -138,7 +139,7 @@ const templates: Template[] = [
   {
     id: 'neighbor-fire',
     title: 'Neighbor fire/smoke',
-    senderOptions: ['Neighbor', 'Concierge', 'Friend'],
+    senderOptions: ['Neighbor', 'Concierge', 'Friend', 'Fire Dept'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Smell of smoke in the hallway, being checked out.",
@@ -157,7 +158,7 @@ const templates: Template[] = [
   {
     id: 'pet-sitter',
     title: 'Pet sitter urgent',
-    senderOptions: ['Pet sitter', 'Neighbor', 'Friend'],
+    senderOptions: ['Pet sitter', 'Neighbor', 'Friend', 'Vet'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Your sitter needs more time — feeding routine issue.",
@@ -176,7 +177,7 @@ const templates: Template[] = [
   {
     id: 'delivery-accident',
     title: 'Delivery accident',
-    senderOptions: ['Delivery', 'Neighbor', 'Shop'],
+    senderOptions: ['Delivery', 'Neighbor', 'Shop', 'Courier'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Package delayed, my apologies — need a minute.",
@@ -195,7 +196,7 @@ const templates: Template[] = [
   {
     id: 'medical-appointment',
     title: 'Medical appointment',
-    senderOptions: ['Clinic', 'Doctor', 'Nurse'],
+    senderOptions: ['Clinic', 'Doctor', 'Nurse', 'Hospital'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Running late for appointment — may need to leave early.",
@@ -214,7 +215,7 @@ const templates: Template[] = [
   {
     id: 'safety-concern',
     title: 'Safety concern',
-    senderOptions: ['Friend', 'Neighbor', 'Security'],
+    senderOptions: ['Friend', 'Neighbor', 'Security', 'Police'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Not feeling great about the area, stepping out for a bit.",
@@ -233,7 +234,7 @@ const templates: Template[] = [
   {
     id: 'apartment-issue',
     title: 'Apartment issue',
-    senderOptions: ['Landlord', 'Neighbor', 'Concierge'],
+    senderOptions: ['Landlord', 'Neighbor', 'Concierge', 'Maintenance'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Small maintenance issue, sorting it out now.",
@@ -252,7 +253,7 @@ const templates: Template[] = [
   {
     id: 'family-trust',
     title: 'Family trust call',
-    senderOptions: ['Sibling', 'Parent', 'Relative'],
+    senderOptions: ['Sibling', 'Parent', 'Relative', 'Lawyer'],
     messagesBySeverity: {
       mild: [
         "{NAME}: Family check-in, nothing serious but need to step out.",
@@ -265,6 +266,25 @@ const templates: Template[] = [
       nuclear: [
         "{NAME}: Serious family emergency, gotta go to them now.",
         "{NAME}: Hospital called — need to be there right away.",
+      ],
+    },
+  },
+  {
+    id: 'plant-sitter',
+    title: 'Plant sitter urgent',
+    senderOptions: ['Plant sitter', 'Neighbor', 'Friend', 'Gardener'],
+    messagesBySeverity: {
+      mild: [
+        "{NAME}: Your plants need watering — can you handle?",
+        "{NAME}: Quick plant check, sorry to bother.",
+      ],
+      medium: [
+        "{NAME}: One of your plants is wilting badly, need advice.",
+        "{NAME}: {DETAIL} with the plants — must check now.",
+      ],
+      nuclear: [
+        "{NAME}: Plant emergency — pests or disease spreading.",
+        "{NAME}: All plants dying, need immediate intervention.",
       ],
     },
   }
