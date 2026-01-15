@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { DateSession, GeneratedMessage } from '../types'
 import { pickRandomMessage } from '../utils/templateUtils'
-import MessageCard from './MessageCard'
 
 export default function Session({ session, onPanic, onCancel }: { session: DateSession, onPanic: (msg: GeneratedMessage)=>void, onCancel: ()=>void }) {
   const [remainingMs, setRemainingMs] = useState<number | null>(null)
+  const [isPulsing, setIsPulsing] = useState(false)
   const timerRef = useRef<number | null>(null)
 
   useEffect(() => {
@@ -25,6 +25,8 @@ export default function Session({ session, onPanic, onCancel }: { session: DateS
       doPanic()
     } else {
       setRemainingMs(ms)
+      // Add pulsing effect when less than 30 seconds
+      setIsPulsing(ms < 30000)
     }
   }
 
@@ -54,26 +56,76 @@ export default function Session({ session, onPanic, onCancel }: { session: DateS
   }
 
   return (
-    <div className="p-4 max-w-md mx-auto">
-      <h2 className="text-xl font-bold">Active Session</h2>
-      <p className="text-sm text-gray-600">Scenario: {session.templateId} — Sender: {session.senderName}</p>
-
-      <div className="mt-6">
-        <button onClick={handleImmediatePanic} className="w-full p-6 panic-btn text-xl">PANIC</button>
+    <div className="p-6 max-w-md mx-auto animate-fade-in">
+      {/* Session Info Card */}
+      <div className="card mb-6">
+        <div className="flex items-start gap-3 mb-4">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white text-2xl shadow-card">
+            🚨
+          </div>
+          <div className="flex-1">
+            <h2 className="text-xl font-bold text-gray-900">Active Session</h2>
+            <p className="text-sm text-gray-600 mt-1">Ready for emergency exit</p>
+          </div>
+        </div>
+        
+        <div className="space-y-2 bg-gray-50 rounded-xl p-4">
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-600">Scenario:</span>
+            <span className="font-medium text-gray-900">{session.templateId}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-600">Sender:</span>
+            <span className="font-medium text-gray-900">{session.senderName}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-600">Mode:</span>
+            <span className="font-medium text-gray-900 capitalize">{session.deliveryMode}</span>
+          </div>
+        </div>
       </div>
 
+      {/* Scheduled Timer */}
       {session.deliveryMode === 'scheduled' && (
-        <div className="mt-4 text-center">
-          {remainingMs === null ? <div>Scheduling...</div> : (
-            <div>
-              <div className="text-sm text-gray-600">Time until message</div>
-              <div className="text-2xl font-mono mt-1">{formatMs(remainingMs)}</div>
-              <div className="mt-4 flex gap-2">
-                <button onClick={handleCancel} className="flex-1 p-2 border rounded">Cancel</button>
+        <div className="card mb-6 text-center">
+          {remainingMs === null ? (
+            <div className="text-gray-500 py-4">
+              <div className="animate-pulse">Scheduling...</div>
+            </div>
+          ) : (
+            <div className="py-2">
+              <div className="text-sm text-gray-600 mb-2">Message arrives in</div>
+              <div className={`text-6xl font-bold font-mono ${isPulsing ? 'text-red-600 animate-pulse-slow' : 'text-gray-900'}`}>
+                {formatMs(remainingMs)}
               </div>
+              {isPulsing && (
+                <div className="mt-3 text-sm text-red-600 font-medium animate-bounce-gentle">
+                  Almost time! 🔥
+                </div>
+              )}
             </div>
           )}
         </div>
+      )}
+
+      {/* Panic Button */}
+      <div className="mb-6">
+        <button onClick={handleImmediatePanic} className="panic-btn group relative overflow-hidden">
+          <span className="relative z-10 flex items-center justify-center gap-3">
+            <span className="text-3xl group-active:scale-110 transition-transform">⚠️</span>
+            <span>PANIC NOW</span>
+          </span>
+        </button>
+        <p className="text-xs text-center text-gray-500 mt-3">
+          Tap to send emergency message instantly
+        </p>
+      </div>
+
+      {/* Cancel Button */}
+      {session.deliveryMode === 'scheduled' && (
+        <button onClick={handleCancel} className="btn-secondary w-full">
+          Cancel Session
+        </button>
       )}
     </div>
   )

@@ -68,42 +68,70 @@ export default function App() {
     setScreen('home')
   }
 
+  function handleDoneViewing() {
+    setScreen('home')
+  }
+
+  function navigateTo(destination: typeof screen) {
+    setScreen(destination)
+    setMenuOpen(false)
+  }
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="flex-1 flex flex-col items-center">
+    <div className="min-h-screen flex flex-col relative">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
         {screen === 'landing' && <Landing onComplete={handleLandingComplete} />}
         {screen === 'home' && <Home onStart={startSession} />}
         {screen === 'session' && session && <Session session={session} onPanic={handlePanic} onCancel={handleCancelSession} />}
         {screen === 'message' && lastMessage && <MessageReceived msg={lastMessage} onDone={handleDoneViewing} />}
+        {screen === 'history' && <History items={history} />}
       </div>
-      {/* Hamburger menu for mobile - hidden on home screen */}
-      {screen !== 'home' && (
-        <button onClick={() => setMenuOpen(!menuOpen)} className="fixed top-4 left-4 p-2 bg-white rounded shadow md:hidden z-20">☰</button>
-      )}
-      {menuOpen && screen !== 'home' && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-30" onClick={() => setMenuOpen(false)}>
-          <div className="absolute top-0 left-0 bottom-0 w-64 bg-white p-4 shadow-lg" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => { setScreen('home'); setMenuOpen(false) }} className="block w-full p-2 mb-2 text-left hover:bg-gray-100">🏠 Home</button>
-            <button onClick={() => { setScreen('history'); setMenuOpen(false) }} className="block w-full p-2 text-left hover:bg-gray-100">📜 History</button>
+
+      {/* Modern Navigation Bar - Bottom on mobile, hidden on landing/home */}
+      {screen !== 'landing' && screen !== 'home' && (
+        <>
+          {/* Mobile Bottom Navigation */}
+          <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40 animate-slide-up">
+            <div className="flex items-center justify-around py-2 px-4">
+              <button 
+                onClick={() => navigateTo('home')} 
+                className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all ${
+                  screen === 'home' ? 'text-primary-600 bg-primary-50' : 'text-gray-600'
+                }`}
+              >
+                <span className="text-2xl">🏠</span>
+                <span className="text-xs font-medium">Home</span>
+              </button>
+              <button 
+                onClick={() => navigateTo('history')} 
+                className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all ${
+                  screen === 'history' ? 'text-primary-600 bg-primary-50' : 'text-gray-600'
+                }`}
+              >
+                <span className="text-2xl">📜</span>
+                <span className="text-xs font-medium">History</span>
+              </button>
+            </div>
+          </nav>
+
+          {/* Desktop Navigation Buttons */}
+          <div className="hidden md:flex fixed top-6 left-6 gap-3 z-40 animate-fade-in">
+            <button 
+              onClick={() => navigateTo('home')} 
+              className={`btn-secondary ${screen === 'home' ? 'ring-2 ring-primary-500' : ''}`}
+            >
+              🏠 Home
+            </button>
+            <button 
+              onClick={() => navigateTo('history')} 
+              className={`btn-secondary ${screen === 'history' ? 'ring-2 ring-primary-500' : ''}`}
+            >
+              📜 History
+            </button>
           </div>
-        </div>
+        </>
       )}
-      {/* Desktop Navigation - hidden on home screen */}
-      {screen !== 'home' && (
-        <div className="fixed top-4 left-4 flex gap-2 hidden md:flex">
-          <button onClick={() => setScreen('home')} className="p-2 bg-white rounded shadow">Home</button>
-          <button onClick={() => setScreen('history')} className="p-2 bg-white rounded shadow">History</button>
-        </div>
-      )}
-      {screen === 'history' && <div className="fixed inset-0 bg-black bg-opacity-30 p-4 z-10">
-        <div className="max-w-md mx-auto bg-white rounded p-4 mt-8">
-          <div className="flex justify-between items-center mb-2">
-            <h3 className="font-bold">History</h3>
-            <button onClick={() => setScreen('home')} className="px-2 py-1 border rounded">Close</button>
-          </div>
-          <History items={history} />
-        </div>
-      </div>}
     </div>
   )
 }
